@@ -34,7 +34,7 @@ const bookingSchema = new mongoose.Schema(
     },
     cancelReason: {
   type: String,
-  enum: ['user_cancelled', 'chef_cancelled', 'chef_blocked'], //  Optional but helpful
+  enum: ['user_cancelled', 'chef_cancelled', 'chef_blocked'], //  Optional
 },
     paymentStatus: {
       type: String,
