@@ -1,0 +1,75 @@
+# ----------------
+# Node dependencies
+# ----------------
+node_modules/
+**/node_modules/
+
+# ----------------
+# Environment files
+# ----------------
+.env
+.env.local
+.env.*.local
+
+# ----------------
+# Build output
+# ----------------
+dist/
+build/
+client/build/
+client/dist/
+server/build/
+
+# ----------------
+# Logs and debug
+# ----------------
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ----------------
+# IDE and Editor folders
+# ----------------
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# ----------------
+# OS-specific
+# ----------------
+.DS_Store
+Thumbs.db
+
+# ----------------
+# Testing coverage
+# ----------------
+coverage/
+
+# ----------------
+# Cache files
+# ----------------
+.npm/
+.cache/
+.eslintcache
+
+# ----------------
+# Optional - ignore uploaded files if stored locally
+# ----------------
+uploads/
+public/uploads/
+server/uploads/
+
+# ----------------
+# MongoDB dump
+# ----------------
+dump/
+
+# Windows-specific
+desktop.ini
+$RECYCLE.BIN/
+System Volume Information/
