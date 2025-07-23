@@ -38,7 +38,7 @@ app.use('/api/bookings', require('./routes/bookingRoutes'));
 
 
 const userRoutes = require('./routes/userRoutes');
-app.use('/api/users', userRoutes); // ✅ VERY IMPORTANT
+app.use('/api/users', userRoutes); //  VERY IMPORTANT
 
 const feedbackRoutes = require('./routes/feedbackRoutes');
 app.use('/api/feedback', feedbackRoutes);
