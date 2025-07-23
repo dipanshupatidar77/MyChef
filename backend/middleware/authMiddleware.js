@@ -102,33 +102,7 @@ exports.protectChef = async (req, res, next) => {
     res.status(401).json({ message: 'Not authorized, no token' });
   }
 };
-// exports.protectChef = async (req, res, next) => {
-//   const token = req.headers.authorization?.split(' ')[1];
 
-//   if (!token) {
-//     console.log('❌ No token in header'); // 👈 Debug
-//     return res.status(401).json({ msg: 'No token, authorization denied' });
-//   }
-
-//   try {
-//     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-//     console.log('🔐 Decoded token:', decoded); // 👈 Check this
-//     console.log('✅ Chef fetched from DB:', chef);
-
-//     const chef = await Chef.findById(decoded.id);
-//     if (!chef) return res.status(404).json({ msg: 'Chef not found' });
-
-//     //req.user = chef; // 👈 req.user will have _id
-//     //req.user = { id: chef._id, }; // Just ID is enough
-//     req.user = { _id: chef._id };
-//     console.log('Decoded Chef:', decoded);
-
-//     next();
-//   } catch (err) {
-//     console.error('❌ Invalid token:', err);
-//     res.status(401).json({ msg: 'Token is not valid' });
-//   }
-// };
 
 
 // Verify Chef (only ID & role)
