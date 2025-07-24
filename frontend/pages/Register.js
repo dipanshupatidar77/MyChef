@@ -108,7 +108,7 @@ const Register = () => {
         <h2>Join <span className="text-highlight">MyChef</span> Today</h2>
         <p className="register-subtext">Whether you're a hungry host or a culinary hero, we've got a spot just for you.</p>
 
-        {/* ✅ Role selection buttons */}
+        {/* Role selection buttons */}
         <div className="role-selection">
           <button
             type="button"
