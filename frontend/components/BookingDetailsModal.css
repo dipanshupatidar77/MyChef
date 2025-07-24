@@ -1,0 +1,22 @@
+/* BookingDetailsModal.css */
+.booking-details-inline {
+  background-color: #f1f1f1;
+  padding: 14px;
+  margin-top: 12px;
+  border-radius: 8px;
+  border-left: 4px solid #007bff;
+  font-size: 14px;
+  animation: fadeIn 0.2s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.booking-details-inline {
+  margin-left: 12px;
+  background-color: #f9f9f9;
+  padding: 10px 16px;
+  border-left: 3px solid #007bff;
+  border-radius: 6px;
+}

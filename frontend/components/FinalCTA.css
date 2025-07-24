@@ -1,0 +1,85 @@
+.final-cta-section {
+  background: linear-gradient(to right, #fff2ea, #ffe6d8);
+  padding: 80px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+}
+
+.cta-content {
+  flex: 1;
+  min-width: 280px;
+}
+
+.cta-content h2 {
+  font-size: 34px;
+  font-weight: bold;
+  color: #8b2d13;
+  margin-bottom: 20px;
+  font-family: 'Georgia', serif;
+}
+.cta-section {
+  background: #f3e5dc; /* Warm neutral */
+  padding: 100px 20px;
+  text-align: center;
+}
+
+.cta-content p {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 30px;
+}
+
+.cta-btn {
+  background-color: #8b2d13;
+  color: #fff;
+  padding: 14px 28px;
+  font-size: 16px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.cta-btn:hover {
+  background-color: #a43d1d;
+}
+
+.chef-card {
+  flex: 1;
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+  text-align: center;
+  min-width: 300px;
+}
+
+.chef-card h3 {
+  font-size: 24px;
+  color: #8b2d13;
+  margin-bottom: 15px;
+}
+
+.chef-card p {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 25px;
+}
+
+.join-btn {
+  background-color: #ff6600;
+  color: white;
+  border: none;
+  padding: 12px 26px;
+  border-radius: 25px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.join-btn:hover {
+  background-color: #e85a00;
+}
