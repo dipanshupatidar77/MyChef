@@ -1,0 +1,41 @@
+.chef-booking-card {
+  border: 1px solid #ccc;
+  padding: 16px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: box-shadow 0.3s ease;
+  background: #fff;
+  width: 280px;
+  margin: 10px;
+}
+
+.chef-booking-card:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.chef-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.chef-info {
+  text-align: center;
+}
+
+.book-now-btn {
+  margin-top: 10px;
+  background-color: #ff6b6b;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.book-now-btn:hover {
+  background-color: #e64c4c;
+}

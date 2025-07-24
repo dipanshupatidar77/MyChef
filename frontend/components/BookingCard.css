@@ -1,0 +1,79 @@
+.booking-card {
+  border: none;
+  padding: 24px;
+  border-radius: 20px;
+  margin-bottom: 24px;
+  background: linear-gradient(to right, #fffdfb, #fff7f0);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  backdrop-filter: blur(3px);
+}
+
+.booking-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.12);
+}
+
+.accepted-buttons {
+  margin-top: 20px;
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.btn {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn-primary {
+  background: linear-gradient(to right, #7f5af0, #2cb67d);
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(to right, #6842e4, #1aab7c);
+  box-shadow: 0 6px 14px rgba(127, 90, 240, 0.3);
+}
+
+.btn-secondary {
+  background: linear-gradient(to right, #b8c1ec, #d3dce6);
+  color: #1f2937;
+}
+
+.btn-secondary:hover {
+  background: linear-gradient(to right, #a2add0, #c2cad6);
+  box-shadow: 0 6px 12px rgba(100, 116, 139, 0.3);
+}
+
+.btn:disabled,
+.btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: #ccc;
+  color: #777;
+}
+
+.thank-you-msg {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #1b9c56;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  background-color: #e6f4ea;
+  padding: 10px 16px;
+  border-radius: 10px;
+  display: inline-block;
+}

@@ -1,0 +1,88 @@
+.reviews-section {
+  background: linear-gradient(to right, #fff2ea, #ffe6d8);
+  padding: 80px 20px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.reviews-heading {
+  font-size: 36px;
+  font-weight: 700;
+  color: #8b2d13;
+  margin-bottom: 40px;
+  font-family: 'Georgia', serif;
+}
+
+/* Slider Container */
+.reviews-slider {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Moving Track */
+.reviews-track {
+  display: flex;
+  width: max-content;
+  gap: 24px;
+  animation: scrollReviews 25s linear infinite;
+}
+
+/* Individual Dark Review Card */
+.review-card {
+  width: 260px;
+  min-height: 300px;
+  background: linear-gradient(to bottom right, #1c1c1e, #2e2e31);
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  font-family: 'Segoe UI', sans-serif;
+  text-align: left;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+  border: 1px solid #444;
+}
+
+.review-card:hover {
+  transform: scale(1.05);
+}
+
+/* Feedback Message Styling */
+.review-card .message {
+  font-size: 16px;
+  font-style: italic;
+  color: #ffda9e; /* Soft golden */
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+/* Username Styling */
+.review-card .name {
+  font-weight: bold;
+  font-size: 15px;
+  text-align: right;
+  color: #61dafb; /* Light blue */
+  margin-top: auto;
+}
+
+/* Keyframes */
+@keyframes scrollReviews {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .review-card {
+    width: 80%;
+    min-height: 240px;
+  }
+
+  .reviews-track {
+    animation-duration: 40s;
+  }
+}

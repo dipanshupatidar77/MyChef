@@ -1,0 +1,86 @@
+.problems-section {
+  background: linear-gradient(to right, #fff2ea, #ffe6d8);
+  padding: 80px 20px;
+}
+
+.problems-heading {
+  font-size: 38px;
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 50px;
+  color: #8b2d13;
+  font-family: 'Georgia', serif;
+}
+
+.slider-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.problem-card-wrapper {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.problem-card-split {
+  display: flex;
+  width: 90%;
+  height: 500px;
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* Left Side Image */
+.problem-img {
+  width: 50%;
+  height: 99%;
+  background-color: #ffe9dc;
+}
+
+.problem-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Right Side Text */
+.problem-text {
+  width: 60%;
+  padding: 60px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.problem-text h3 {
+  font-size: 36px;
+  color: #8b2d13;
+  margin-bottom: 16px;
+  transition: all 0.3s ease;
+}
+
+.problem-text p {
+  font-size: 17px;
+  color: #444;
+  line-height: 1.6;
+}
+
+/* Hover effect */
+.problem-text:hover h3 {
+  color: #e64a19;
+  transform: translateX(5px);
+}
+
+.problem-text:hover p {
+  color: #6d4c41;
+}
+
+/* Fix slick-slide height */
+.slick-slide > div {
+  height: 100%;
+}
