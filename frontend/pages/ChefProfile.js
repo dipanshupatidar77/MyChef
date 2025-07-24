@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../styles/ChefProfile.css';
 import BookingForm from '../components/BookingForm';
-import { getChefReviews } from '../services/userApi'; // ✅ updated API
+import { getChefReviews } from '../services/userApi'; // updated API
 
 const ChefProfile = () => {
   const { id } = useParams();
@@ -24,7 +24,7 @@ const ChefProfile = () => {
   const [reviews, setReviews] = useState([]);
   const [loadingReviews, setLoadingReviews] = useState(false);
 
-  // ✅ Load chef & average rating
+  // Load chef & average rating
   useEffect(() => {
     const fetchChef = async () => {
       try {
@@ -115,7 +115,7 @@ const ChefProfile = () => {
         <p><strong>Service Time:</strong> {chef.serviceTime?.from} - {chef.serviceTime?.to}</p>
         <p><strong>Charge per visit:</strong> ₹{chef.chargesPerVisit}</p>
 
-        {/* ✅ Average rating */}
+        {/* Average rating */}
         <p><strong>Rating:</strong> {renderStars(avgRating)} ({avgRating || '0'})</p>
 
        
