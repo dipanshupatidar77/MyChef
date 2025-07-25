@@ -1,0 +1,143 @@
+.register-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  background-color: #fffaf4;
+  padding: 60px 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  margin: 40px auto;
+  max-width: 1200px;
+}
+
+.register-left {
+  flex: 1;
+  min-width: 300px;
+  text-align: center;
+}
+
+.register-left img {
+  max-width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.register-right {
+  flex: 1.2;
+  min-width: 350px;
+}
+
+.register-right h2 {
+  font-size: 2.2rem;
+  color: #333;
+}
+
+.register-subtext {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.text-highlight {
+  color: #ff7e47;
+}
+
+form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+form input,
+form select {
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+form button {
+  grid-column: span 2;
+  padding: 14px;
+  font-size: 1.1rem;
+  background-color: #0e9f6e;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+form button:hover {
+  background-color: #0b7c56;
+}
+
+.form-group {
+  grid-column: span 2;
+}
+
+.checkbox-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.checkbox-container label {
+  background-color: #f8f8f8;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.checkbox-container input[type='checkbox'] {
+  margin-right: 6px;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .register-wrapper {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  form {
+    grid-template-columns: 1fr;
+  }
+
+  form button {
+    grid-column: span 1;
+  }
+}
+/* ✅ Toggle buttons for role */
+.role-selection {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.role-btn {
+  flex: 1;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 2px solid #ccc;
+  background-color: #f4f4f4;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.role-btn:hover {
+  background-color: #e6e6e6;
+}
+
+.role-btn.active {
+  background-color: #ff7e47;
+  color: white;
+  border-color: #ff7e47;
+  font-weight: bold;
+  transform: scale(1.03);
+}
