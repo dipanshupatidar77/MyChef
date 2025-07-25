@@ -1,0 +1,62 @@
+.admin-feedbacks {
+  padding: 20px;
+  background-color: #fdfdfd;
+  min-height: 100vh;
+}
+
+.admin-feedbacks h2 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.feedback-card {
+  background: #ffffff;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.feedback-card h4 {
+  margin: 0 0 8px;
+  color: #444;
+}
+
+.feedback-card p {
+  margin: 6px 0;
+  color: #555;
+}
+
+.btn-group {
+  margin-top: 12px;
+  display: flex;
+  gap: 10px;
+}
+
+.accept-btn,
+.reject-btn {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.accept-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+.reject-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+.accept-btn:hover {
+  background-color: #218838;
+}
+
+.reject-btn:hover {
+  background-color: #c82333;
+}

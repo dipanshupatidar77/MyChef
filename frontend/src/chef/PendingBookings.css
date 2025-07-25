@@ -1,0 +1,76 @@
+.pending-bookings-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+.booking-card {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  background-color: #fff;
+  transition: 0.3s ease;
+}
+
+.booking-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+.card-actions {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.card-actions button {
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.card-actions button:hover {
+  opacity: 0.9;
+}
+
+.accept-btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.reject-btn {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.accept-btn:hover,
+.reject-btn:hover {
+  opacity: 0.9;
+}
+
+.no-bookings-message {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+  margin-top: 3rem;
+}

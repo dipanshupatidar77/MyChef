@@ -1,0 +1,66 @@
+.booking-form {
+  max-width: 600px;
+  margin: 2.5rem auto;
+  background: linear-gradient(to bottom right, #fff7f2, #ffe8dc);
+  padding: 2.5rem 2rem;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.booking-form h3 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 24px;
+  color: #8b2d13;
+  font-weight: 700;
+  font-family: 'Georgia', serif;
+}
+
+.booking-form input,
+.booking-form textarea,
+.booking-form select {
+  display: block;
+  width: 100%;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background: #fff;
+  font-size: 1rem;
+  transition: 0.2s border-color ease;
+}
+
+.booking-form input:focus,
+.booking-form textarea:focus,
+.booking-form select:focus {
+  border-color: #f08d49;
+  outline: none;
+}
+
+.booking-form button {
+  width: 100%;
+  padding: 0.9rem;
+  background-color: #ff5e3a;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.booking-form button:hover {
+  background-color: #e64a19;
+}
+
+.booking-success {
+  text-align: center;
+  font-size: 1.2rem;
+  color: green;
+  padding: 2rem;
+  background-color: #eafbe5;
+  border: 1px solid #b2e5ae;
+  border-radius: 10px;
+}
