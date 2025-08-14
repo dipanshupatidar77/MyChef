@@ -1,5 +1,5 @@
 import React from 'react';
-import './BookingDetailsModal.css'; // ✅ This remains for styling
+import './BookingDetailsModal.css'; //  This remains for styling
 
 const BookingDetailsModal = ({ booking }) => {
   if (!booking) return null;

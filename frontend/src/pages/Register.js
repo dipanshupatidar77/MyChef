@@ -157,24 +157,7 @@ const Register = () => {
                 </div>
               </div>
 
-              {/* {formData.specialty.length > 0 && (
-                <div className="form-group">
-                  <label>Select Dishes:</label>
-                  <div className="checkbox-container">
-                    {formData.specialty.flatMap((sp) => dishCategories[sp] || []).map((dish) => (
-                      <label key={dish}>
-                        <input
-                          type="checkbox"
-                          value={dish}
-                          checked={formData.dishes.includes(dish)}
-                          onChange={(e) => handleDishChange(dish, e.target.checked)}
-                        />
-                        {dish}
-                      </label>
-                    ))}
-                  </div>
-                </div>
-              )} */}
+             
 
               {formData.specialty.length > 0 && (
   <div className="form-group">

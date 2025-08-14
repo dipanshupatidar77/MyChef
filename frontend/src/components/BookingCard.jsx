@@ -15,7 +15,7 @@ const BookingCard = ({ booking }) => {
     _id,
     exitConfirmed,
     review,
-    cancelReason, // ✅ New field
+    cancelReason, //  New field
   } = booking;
 
   const [showDetails, setShowDetails] = useState(false);

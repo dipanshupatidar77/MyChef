@@ -1,6 +1,6 @@
 // src/about/AboutStory.jsx
 import React from 'react';
-import journeyImage from '../assests/journey-start.jpg'; // ← Use appropriate image here
+import journeyImage from '../assests/journey-start.jpg'; // 
 import './about.css';
 
 const AboutStory = () => {

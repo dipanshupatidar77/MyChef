@@ -1,10 +1,10 @@
 import axios from 'axios';
 
 export const getAllApprovedChefs = () =>
-  axios.get('/api/chefs/approved').then(res => res.data.chefs); // ✅
+  axios.get('/api/chefs/approved').then(res => res.data.chefs); // 
 
 export const searchChefsByCity = (city) =>
-  axios.get(`/api/chefs/approved?city=${city}`).then(res => res.data.chefs); // ✅
+  axios.get(`/api/chefs/approved?city=${city}`).then(res => res.data.chefs); // 
 
 export const getChefById = (id) =>
   axios.get(`/api/chefs/${id}`).then(res => res.data.chef);
@@ -13,7 +13,7 @@ export const getChefById = (id) =>
 // For fetching pending bookings
 
 export const getPendingBookings = async () => {
-  const token = localStorage.getItem('chefToken'); // ✅ Correct token
+  const token = localStorage.getItem('chefToken'); //  Correct token
   try {
     const res = await axios.get('/api/bookings/chef/pending', {
       headers: { Authorization: `Bearer ${token}` }
@@ -24,7 +24,7 @@ export const getPendingBookings = async () => {
     return [];
   }
 };
-// ✅ Accept booking
+//  Accept booking
 export const acceptBooking = async (bookingId, token) => {
   try {
     const res = await fetch(`/api/chef/bookings/${bookingId}/accept`, {
@@ -42,7 +42,7 @@ export const acceptBooking = async (bookingId, token) => {
   }
 };
 
-// ✅ Reject booking
+// Reject booking
 export const rejectBooking = async (bookingId, token) => {
   try {
     const res = await fetch(`/api/chef/bookings/${bookingId}/reject`, {
@@ -66,7 +66,7 @@ export const rejectBooking = async (bookingId, token) => {
 
 export const updateBookingStatus = async (bookingId, status) => {
   try {
-    const token = localStorage.getItem('chefToken'); // ✅ FIXED HERE
+    const token = localStorage.getItem('chefToken'); //  FIXED HERE
 
     if (!token) {
       throw new Error('Authentication token not found');
@@ -118,7 +118,7 @@ export const sendEntryOtp = async (bookingId, token) => {
 export const verifyEntryOtp = (bookingId, otp, token) => {
   return axios.post(
     `/api/bookings/${bookingId}/verify-entry-otp`,
-    { otp }, // ✅ body must be JSON with "otp"
+    { otp }, //  body must be JSON with "otp"
     {
       headers: {
         Authorization: `Bearer ${token}`,

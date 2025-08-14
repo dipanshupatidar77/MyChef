@@ -26,8 +26,8 @@ export const blockChefById = async (id) => {
   return res.data;
 };
 
-// ✅ Corrected adminApi.js function
-// ✅ adminApi.js
+//  Corrected adminApi.js function
+//    adminApi.js
 export const getAllPayments = async () => {
   const token = localStorage.getItem('adminToken'); // Ensure this exists
   const res = await axios.get('http://localhost:5000/api/admin/get-all-payments', {
@@ -35,7 +35,7 @@ export const getAllPayments = async () => {
       Authorization: `Bearer ${token}`,
     },
   });
-  return res.data.payments; // ✅ Only the array
+  return res.data.payments; //  Only the array
 };
 
 

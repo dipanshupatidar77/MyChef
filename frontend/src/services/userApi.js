@@ -20,7 +20,7 @@ export const submitReview = (bookingId, rating, comment, token) =>
 
 export const getChefReviews = async (chefId) => {
   const res = await axios.get(`/api/bookings/chef/${chefId}/reviews`);
-  return res; // 👈 Important: return the whole response object
+  return res; //  Important: return the whole response object
 };
 
 

@@ -16,7 +16,7 @@ const BookChef = () => {
     try {
       const data = await getAllApprovedChefs();
       console.log("✅ API response:", data);
-      // ✅ Filter blocked chefs
+      //  Filter blocked chefs
       const filtered = Array.isArray(data)
         ? data.filter(chef => !chef.isBlocked)
         : [];

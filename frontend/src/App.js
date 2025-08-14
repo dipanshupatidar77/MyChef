@@ -1,67 +1,7 @@
-// import React from 'react';
-// import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
-// import Navbar from './components/Navbar';
-// import Home from './pages/Home';
-// import Login from './pages/Login';
-// import Register from './pages/Register';
-// import BookChef from './pages/BookChef';
-// import Contact from './pages/Contact';
-// import About from './pages/About';
-// import ChefProfile from './pages/ChefProfile'; 
-// import AdminLogin from './admin/AdminLogin';
-// import AdminDashboard from './admin/AdminDashboard';
-// import AdminRoute from './admin/AdminRoute';
-
-// function App() {
-//   return (
-//     <Router>
-//       {/* Navbar shown only on user pages, not admin */}
-//       <Routes>
-//         {/* User site routes with Navbar */}
-//         <Route
-//           path="/*"
-//           element={
-//             <>
-//               <Navbar />
-//               <div className="container mt-4">
-//                 <Routes>
-//                   <Route path="/" element={<Home />} />
-//                   <Route path="/login" element={<Login />} />
-//                   <Route path="/register" element={<Register />} />
-//                   <Route path="/book-chef" element={<BookChef />} />
-//                   <Route path="/contact" element={<Contact />} />
-//                   <Route path="/about" element={<About />} />
-//                   <Route path="/chef/:id" element={<ChefProfile />} />
-//                   <Route path="/book-chef/:chefId" element={<BookChef />} />
-
-//                 </Routes>
-//               </div>
-//             </>
-//           }
-//         />
-
-//         {/* Admin routes without Navbar */}
-//         <Route path="/admin-login" element={<AdminLogin />} />
-//         <Route
-//           path="/admin/dashboard"
-//           element={
-//             <AdminRoute>
-//               <AdminDashboard />
-//             </AdminRoute>
-//           }
-//         />
-//       </Routes>
-//     </Router>
-//   );
-// }
-
-// export default App;
-
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import Navbar from './components/Navbar'; // ✅ this works fine
+import Navbar from './components/Navbar'; //  this works fine
 import ChefProfilePage from './chef/ChefProfilePage';
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -82,7 +22,7 @@ import UserProfilePage from './user/UserProfilePage';
 import AdminFeedbacks from './admin/AdminFeedbacks'; 
 import BecomeChef from 'chef/BecomeChef';
 import ChefCompletedBookings from 'chef/CompletedBookings';
-// ✅ ADDED: BookingPage import
+//  ADDED: BookingPage import
 import BookingPage from './pages/BookingPage';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -110,7 +50,7 @@ function App() {
 
                   {/* ❌ OLD route removed: <Route path="/book-chef/:chefId" element={<BookChef />} /> */}
                   
-                  {/* ✅ NEW: BookingPage route added */}
+                  {/*  NEW: BookingPage route added */}
                   <Route path="/book-chef/booking/:chefId" element={<BookingPage />} />
                   <Route path="/chef/dashboard" element={<ChefDashboard />} />
                   <Route path="/chef/bookings/pending" element={<PendingBookings />} />
