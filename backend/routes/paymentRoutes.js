@@ -5,7 +5,7 @@ const {
   updatePaymentStatus,
 } = require('../controllers/paymentController');
 
-// ✅ Route must match this exactly
+//  Route must match this exactly
 router.post('/create-order', createOrder);
 router.put('/update-payment/:bookingId', updatePaymentStatus);
 

@@ -68,7 +68,7 @@ exports.approveChef = async (req, res) => {
       return res.status(404).json({ msg: 'Chef not found' });
     }
 
-    // ✅ Send approval email to chef
+    //  Send approval email to chef
     if (updatedChef.email) {
       await sendEmail({
         to: updatedChef.email,
@@ -103,13 +103,13 @@ exports.rejectChef = async (req, res) => {
   try {
     const { chefId } = req.params;
 
-    // ✅ Get chef data before deleting
+    // Get chef data before deleting
     const chef = await Chef.findById(chefId);
     if (!chef) {
       return res.status(404).json({ msg: 'Chef not found' });
     }
 
-    // ✅ Send rejection email
+    // Send rejection email
     if (chef.email) {
       await sendEmail({
         to: chef.email,
@@ -125,7 +125,7 @@ exports.rejectChef = async (req, res) => {
       });
     }
 
-    // ✅ Delete the chef
+    // Delete the chef
     await Chef.findByIdAndDelete(chefId);
     res.status(200).json({ msg: 'Chef rejected, deleted, and notified' });
 
@@ -143,103 +143,19 @@ exports.getApprovedChefs = async (req, res) => {
   }
 };
 
-// for blocking the chef
-
-// exports.blockChef = async (req, res) => {
-//   try {
-//     const { chefId } = req.params;
-
-//     // Step 1: Mark the chef as blocked
-//     const chef = await Chef.findByIdAndUpdate(chefId, { isBlocked: true }, { new: true });
-
-//     if (!chef) {
-//       return res.status(404).json({ msg: 'Chef not found' });
-//     }
-
-//     // Step 2: Find all future bookings of this chef
-//     const currentDate = new Date();
-//     const upcomingBookings = await Booking.find({
-//       chef: chefId,
-//       bookingDate: { $gte: currentDate },
-//       status: { $ne: 'cancelled' }
-//     });
-
-//     // Step 3: Cancel each booking and notify the user
-//     for (const booking of upcomingBookings) {
-//       booking.status = 'cancelled';
-//       booking.note = 'Booking cancelled due to chef being blocked';
-//       await booking.save();
-
-//       // Get user email
-//       const user = await User.findById(booking.user);
-//       if (user) {
-//         await sendEmail({
-//           to: user.email,
-//           subject: 'Chef Blocked - Booking Cancelled',
-//           text: `Dear ${user.name},\n\nYour booking with chef ${chef.name} has been cancelled because the chef was blocked by our admin team.\n\nPlease rebook with another chef or contact support for refunds and more details.\n\nThank you,\nMyChef Team`
-//         });
-//       }
-//     }
-
-//     res.status(200).json({ msg: 'Chef blocked and upcoming bookings cancelled. Users notified.' });
-
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).json({ msg: 'Server error', error: err.message });
-//   }
-// };
-
-
-// exports.blockChef = async (req, res) => {
-//   try {
-//     const { chefId } = req.params;
-
-//     // 1. Set isBlocked = true
-//     const chef = await Chef.findByIdAndUpdate(
-//       chefId,
-//       { isBlocked: true ,password: null,
-//         approvalPassword: null},
-//       { new: true }
-//     );
-
-//     if (!chef) {
-//       return res.status(404).json({ msg: 'Chef not found' });
-//     }
-
-//     // 2. Cancel all future bookings (pending/confirmed)
-//     await Booking.updateMany(
-//       {
-//         chef: chefId,
-//         status: { $in: ['pending', 'confirmed'] }
-//       },
-//       {
-//         $set: {
-//           status: 'cancelled',
-//           cancelReason: 'chef_blocked'
-//         }
-//       }
-//     );
-
-//     res.status(200).json({ msg: 'Chef blocked and related bookings cancelled' });
-
-//   } catch (error) {
-//     res.status(500).json({ msg: 'Server error', error: error.message });
-//   }
-// };
-
 
 exports.blockChef = async (req, res) => {
   try {
     const { chefId } = req.params;
 
-    // ✅ 1. Block the chef
+    //  1. Block the chef
     const chef = await Chef.findByIdAndUpdate(chefId, { isBlocked: true,passward:null,approvalPassword:null }, { new: true });
 
     if (!chef) {
       return res.status(404).json({ msg: 'Chef not found' });
     }
 
-    // ✅ 2. Send email to chef
+    //   2. Send email to chef
     if (chef.email) {
       await sendEmail({
         to: chef.email,
@@ -255,7 +171,7 @@ exports.blockChef = async (req, res) => {
       });
     }
 
-    // ✅ 3. Notify all users who have bookings with this chef (not cancelled)
+    //  3. Notify all users who have bookings with this chef (not cancelled)
     const bookings = await Booking.find({ chef: chefId, status: { $ne: 'cancelled' } }).populate('user');
 
     const userNotificationPromises = bookings.map(booking => {
@@ -292,25 +208,11 @@ exports.blockChef = async (req, res) => {
   }
 };
 
-
-// exports.getAllPayments = async (req, res) => {
-//   try {
-//     const paidBookings = await Booking.find({ paymentStatus: 'done' })
-//       .populate('user', 'name email')
-//       .populate('chef', 'name chargesPerVisit')
-//       .select('user chef eventDate paymentDate transactionId');
-
-//     res.status(200).json({ payments: paidBookings });
-//   } catch (err) {
-//     res.status(500).json({ msg: 'Server error', error: err.message });
-//   }
-// };
-
 exports.getAllPayments = async (req, res) => {
   try {
     const paidBookings = await Booking.find({ paymentStatus: 'done' })
       .populate('user', 'name email')
-      .populate('chef', 'name chargesPerVisit') // ✅ now includes amount
+      .populate('chef', 'name chargesPerVisit') //  now includes amount
       .select('user chef eventDate paymentDate transactionId');
 
     res.status(200).json({ payments: paidBookings });

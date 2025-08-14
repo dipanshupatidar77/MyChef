@@ -1,5 +1,5 @@
 // controllers/paymentController.js
-const razorpayInstance = require('../utils/razorpayInstance'); // ✅ use the correct instance
+const razorpayInstance = require('../utils/razorpayInstance'); //  use the correct instance
 const Booking = require('../models/Booking');
 
 exports.createOrder = async (req, res) => {
@@ -23,7 +23,7 @@ exports.createOrder = async (req, res) => {
       receipt: `receipt_order_${Date.now()}`,
     };
 
-    // ✅ Use the correct instance here
+    // Use the correct instance here
     const order = await razorpayInstance.orders.create(options);
     return res.status(200).json({ order, success: true });
 
@@ -39,71 +39,6 @@ exports.createOrder = async (req, res) => {
   }
 };
 
-
-
-// exports.updatePaymentStatus = async (req, res) => {
-//   try {
-//     const booking = await Booking.findById(req.params.bookingId);
-
-//     if (!booking) {
-//       return res.status(404).json({ message: 'Booking not found' });
-//     }
-
-//     booking.paymentStatus = 'done';
-//     await booking.save();
-
-//     res.status(200).json({ message: 'Payment status updated successfully' });
-//   } catch (error) {
-//     console.error('Payment update error:', error);
-//     res.status(500).json({ message: 'Internal server error' });
-//   }
-// };
-
-// exports.updatePaymentStatus = async (req, res) => {
-//   try {
-//     const booking = await Booking.findById(req.params.bookingId);
-
-//     if (!booking) {
-//       return res.status(404).json({ message: 'Booking not found' });
-//     }
-
-//     // ✅ Update only if not already done
-//     booking.paymentStatus = 'done';
-
-//     // ✅ Add Razorpay transaction ID and payment date (from body or use current time)
-//     booking.transactionId = req.body.transactionId || 'Unknown-TXN'; // fallback if not sent
-//     booking.paymentDate = new Date();
-
-//     await booking.save();
-
-//     res.status(200).json({ message: 'Payment status updated successfully' });
-//   } catch (error) {
-//     console.error('Payment update error:', error);
-//     res.status(500).json({ message: 'Internal server error' });
-//   }
-// };
-
-// controllers/bookingController.js
-// exports.updatePaymentStatus = async (req, res) => {
-//   try {
-//     const booking = await Booking.findById(req.params.bookingId);
-
-//     if (!booking) {
-//       return res.status(404).json({ message: 'Booking not found' });
-//     }
-
-//     booking.paymentStatus = 'done';
-//     booking.paymentDate = new Date(); // ✅ Set payment date here
-//     await booking.save();
-
-//     res.status(200).json({ message: 'Payment status updated successfully' });
-//   } catch (error) {
-//     console.error('Payment update error:', error);
-//     res.status(500).json({ message: 'Internal server error' });
-//   }
-// };
-
-
 exports.updatePaymentStatus = async (req, res) => {
   try {
     const booking = await Booking.findById(req.params.bookingId);
@@ -114,7 +49,7 @@ exports.updatePaymentStatus = async (req, res) => {
 
     booking.paymentStatus = 'done';
     booking.paymentDate = new Date();
-    booking.transactionId = req.body.transactionId || 'test_txn_' + Date.now(); // ✅ Add this line
+    booking.transactionId = req.body.transactionId || 'test_txn_' + Date.now(); 
 
     await booking.save();
 

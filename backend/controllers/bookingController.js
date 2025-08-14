@@ -1,6 +1,6 @@
 const Booking = require('../models/Booking');
 const sendEmail = require('../utils/emailSender');
-const Chef = require('../models/Chef'); // ✅ Required to fetch chef's email
+const Chef = require('../models/Chef'); // Required to fetch chef's email
 
 exports.createBooking = async (req, res) => {
   try {
@@ -42,7 +42,7 @@ exports.createBooking = async (req, res) => {
     await newBooking.save();
     console.log(await Booking.find()); // in createBooking
 
-    // ✅ Send email to the user confirming booking creation
+    //  Send email to the user confirming booking creation
     await sendEmail({
       to: userEmail,
       subject: 'MyChef Booking Confirmation',
@@ -60,7 +60,7 @@ exports.createBooking = async (req, res) => {
       `
     });
 
-    // ✅ Send email to the chef notifying new booking
+    //  Send email to the chef notifying new booking
     const chef = await Chef.findById(chefId);
     if (chef && chef.email) {
       await sendEmail({
@@ -139,7 +139,7 @@ exports.updateBookingStatus = async (req, res) => {
   try {
     const bookingId = req.params.id;
 
-    // ✅ Populate user to get user email
+    //  Populate user to get user email
     const booking = await Booking.findById(bookingId).populate('user');
 
     if (!booking) return res.status(404).json({ msg: 'Booking not found' });
@@ -148,11 +148,11 @@ exports.updateBookingStatus = async (req, res) => {
       return res.status(403).json({ msg: 'You are not authorized to update this booking' });
     }
 
-    booking.status = status.toLowerCase(); // ✅ Match the enum
+    booking.status = status.toLowerCase(); // Match the enum
 
     await booking.save();
 
-    // ✅ Send email to user based on status
+    // Send email to user based on status
     if (booking.user && booking.user.email) {
       let subject = '';
       let html = '';
@@ -238,7 +238,7 @@ exports.markPaymentDone = async (req, res) => {
 
 exports.generateEntryOtp = async (req, res) => {
   try {
-    // ✅ Populate user to get user email
+    //  Populate user to get user email
     const booking = await Booking.findById(req.params.id).populate('user');
 
     if (!booking) return res.status(404).json({ msg: 'Booking not found' });
@@ -256,10 +256,10 @@ exports.generateEntryOtp = async (req, res) => {
 
     await booking.save();
 
-    // ✅ Log OTP for development/testing
+    //  Log OTP for development/testing
     console.log(`Generated OTP for Booking ID ${booking._id}:`, otp);
 
-    // ✅ Send OTP via email to user
+    //  Send OTP via email to user
     if (booking.user && booking.user.email) {
       await sendEmail({
         to: booking.user.email,
@@ -299,7 +299,7 @@ exports.verifyEntryOtp = async (req, res) => {
 
     const { otp } = req.body;
 
-    // ✅ Compare with stored OTP
+    //  Compare with stored OTP
     if (booking.entryOtp !== otp) {
       return res.status(400).json({ msg: 'Invalid OTP' });
     }
@@ -323,7 +323,7 @@ exports.verifyEntryOtp = async (req, res) => {
 
 exports.generateExitOtp = async (req, res) => {
   try {
-    const booking = await Booking.findById(req.params.id).populate('user'); // ✅ populate user to get email
+    const booking = await Booking.findById(req.params.id).populate('user'); //  populate user to get email
     if (!booking) return res.status(404).json({ msg: 'Booking not found' });
 
     if (booking.chef.toString() !== req.user._id.toString()) {
@@ -336,9 +336,9 @@ exports.generateExitOtp = async (req, res) => {
 
     await booking.save();
 
-    console.log(`[EXIT OTP]: ${otp}`); // ⬅️ TEMP for testing
+    console.log(`[EXIT OTP]: ${otp}`); //  TEMP for testing
 
-    // ✅ Email the exit OTP to the user
+    //  Email the exit OTP to the user
     if (booking.user && booking.user.email) {
       await sendEmail({
         to: booking.user.email,
@@ -366,29 +366,7 @@ exports.generateExitOtp = async (req, res) => {
   }
 };
 
-// Verify Exit OTP
-// exports.verifyExitOtp = async (req, res) => {
-//   try {
-//     const { otp } = req.body;
-//     const booking = await Booking.findById(req.params.id);
 
-//     if (!booking) return res.status(404).json({ msg: 'Booking not found' });
-
-//     if (booking.exitOtp !== otp) {
-//       return res.status(400).json({ msg: 'Invalid OTP' });
-//     }
-
-//     booking.exitConfirmed = true;
-//     //booking.exitConfirmed = 'completed';// added this line here
-//     booking.status = 'completed';
-//     await booking.save();
-     
-//     res.status(200).json({ msg: 'Exit OTP verified successfully ✅' });
-//   } catch (err) {
-//     console.error('Error verifying exit OTP:', err);
-//     res.status(500).json({ msg: 'Server error' });
-//   }
-// };
 
 exports.verifyExitOtp = async (req, res) => {
   try {
@@ -401,8 +379,8 @@ exports.verifyExitOtp = async (req, res) => {
       return res.status(400).json({ msg: 'Invalid OTP' });
     }
 
-    booking.exitConfirmed = true;         // ✅ proper boolean
-    booking.status = 'completed';         // ✅ status updated
+    booking.exitConfirmed = true;         //  proper boolean
+    booking.status = 'completed';         //  status updated
 
     await booking.save();
 
@@ -477,77 +455,13 @@ exports.getChefReviews = async (req, res) => {
 };
 
 // // cancellation from the userside( cancel booking by the USer)
-// exports.cancelBooking = async (req, res) => {
-//   try {
-//     const bookingId = req.params.id;
-//     const booking = await Booking.findById(bookingId);
 
-//     if (!booking) {
-//       return res.status(404).json({ msg: 'Booking not found' });
-//     }
-
-//     // Check if already cancelled
-//     if (booking.status === 'cancelled') {
-//       return res.status(400).json({ msg: 'Booking is already cancelled' });
-//     }
-
-//     // Calculate time difference
-//     const now = new Date();
-//     const bookingTime = new Date(booking.bookingDateTime); // make sure this exists in DB
-//     const diffInMs = bookingTime - now;
-//     const diffInHours = diffInMs / (1000 * 60 * 60);
-
-//     if (diffInHours < 48) {
-//       return res.status(400).json({ msg: 'Booking can only be cancelled before 48 hours' });
-//     }
-
-//     // Update booking status
-//     booking.status = 'cancelled';
-//     await booking.save();
-
-//     res.status(200).json({ msg: 'Booking cancelled successfully' });
-//   } catch (error) {
-//     res.status(500).json({ msg: 'Server error', error: error.message });
-//   }
-// };
-
-// exports.cancelBooking = async (req, res) => {
-//   try {
-//     const bookingId = req.params.id;
-//     const booking = await Booking.findById(bookingId);
-
-//     if (!booking) {
-//       return res.status(404).json({ msg: 'Booking not found' });
-//     }
-
-//     if (booking.status === 'cancelled') {
-//       return res.status(400).json({ msg: 'Booking is already cancelled' });
-//     }
-
-//     const now = new Date();
-//     const bookingTime = new Date(booking.bookingDateTime);
-//     const diffInMs = bookingTime - now;
-//     const diffInHours = diffInMs / (1000 * 60 * 60);
-
-//     if (diffInHours < 48) {
-//       return res.status(400).json({ msg: 'Booking can only be cancelled before 48 hours' });
-//     }
-
-//     booking.status = 'cancelled';
-//     booking.cancelledBy = 'user'; // ✅ Important line
-//     await booking.save();
-
-//     res.status(200).json({ msg: 'Booking cancelled successfully' });
-//   } catch (error) {
-//     res.status(500).json({ msg: 'Server error', error: error.message });
-//   }
-// };
 
 exports.cancelBooking = async (req, res) => {
   try {
     const bookingId = req.params.id;
 
-    // ✅ populate chef to get email
+    //  populate chef to get email
     const booking = await Booking.findById(bookingId).populate('chef');
 
     if (!booking) {
@@ -571,7 +485,7 @@ exports.cancelBooking = async (req, res) => {
     booking.cancelledBy = 'user';
     await booking.save();
 
-    // ✅ Email the chef that booking was cancelled
+    //  Email the chef that booking was cancelled
     if (booking.chef && booking.chef.email) {
       await sendEmail({
         to: booking.chef.email,
@@ -602,59 +516,22 @@ exports.cancelBooking = async (req, res) => {
 
 // cancellation from the chef side 
 
-// exports.cancelBookingByChef = async (req, res) => {
-//   try {
-//     const bookingId = req.params.id;
-//     const chefId = req.user.id;
-
-//     const booking = await Booking.findById(bookingId);
-
-//     if (!booking) {
-//       return res.status(404).json({ msg: 'Booking not found' });
-//     }
-
-//     // ✅ Check if this booking belongs to the logged-in chef
-//     if (booking.chef.toString() !== chefId.toString()) {
-//       return res.status(403).json({ msg: 'Unauthorized access to this booking' });
-//     }
-
-//     // ✅ Allow cancellation only if booking is not already cancelled
-//     if (booking.status === 'cancelled') {
-//       return res.status(400).json({ msg: 'Booking already cancelled' });
-//     }
-
-//     // ✅ Mark booking as cancelled
-//     booking.status = 'cancelled';
-//     await booking.save();
-
-//     // ✅ In real-world scenario: Track cancellation count per chef/month
-
-//     res.status(200).json({
-//       msg: 'Booking cancelled successfully by chef',
-//       note: 'You have only 2 free cancellations allowed per month. After that, your payout will be reduced as penalty.'
-//     });
-//   } catch (error) {
-//     console.error('Error cancelling booking by chef:', error.message);
-//     res.status(500).json({ msg: 'Server error', error: error.message });
-//   }
-// };
 
 
-//const sendEmail = require('../utils/emailSender'); // ✅ Add this if not already at top
 
 exports.cancelBookingByChef = async (req, res) => {
   try {
     const bookingId = req.params.id;
     const chefId = req.user.id;
 
-    // ✅ populate user to notify them
+    //  populate user to notify them
     const booking = await Booking.findById(bookingId).populate('user');
 
     if (!booking) {
       return res.status(404).json({ msg: 'Booking not found' });
     }
 
-    // ✅ Check if this booking belongs to the logged-in chef
+    //  Check if this booking belongs to the logged-in chef
     if (booking.chef.toString() !== chefId.toString()) {
       return res.status(403).json({ msg: 'Unauthorized access to this booking' });
     }
@@ -663,11 +540,11 @@ exports.cancelBookingByChef = async (req, res) => {
       return res.status(400).json({ msg: 'Booking already cancelled' });
     }
 
-    // ✅ Mark booking as cancelled
+    //  Mark booking as cancelled
     booking.status = 'cancelled';
     await booking.save();
 
-    // ✅ Send cancellation email to the user
+    //  Send cancellation email to the user
     if (booking.user && booking.user.email) {
       await sendEmail({
         to: booking.user.email,

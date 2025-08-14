@@ -16,7 +16,7 @@ exports.getUserProfile = async (req, res) => {
 // PUT /api/users/profile
 exports.updateUserProfile = async (req, res) => {
   try {
-    const user = await User.findById(req.user._id); // 👈 comes from protectUser middleware
+    const user = await User.findById(req.user._id); //  comes from protectUser middleware
 
     if (!user) {
       return res.status(404).json({ msg: 'User not found' });

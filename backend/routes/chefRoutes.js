@@ -17,7 +17,7 @@ router.post('/register-chef', upload.single('profilePic'), registerChef);
 router.get('/', getApprovedChefs);
 router.get('/approved', getApprovedChefs);
 
-// ✅ NEW: Route to fetch chef by ID
+//  NEW: Route to fetch chef by ID
 router.get('/:id', getChefById);
 
 router.get('/:id/reviews', getChefReviews); //  New route

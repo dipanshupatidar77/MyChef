@@ -70,13 +70,7 @@ exports.loginUser = async (req, res) => {
   const { email, password, role, approvalPassword } = req.body;
 
   try {
-    // if (role === 'user') {
-    //   const user = await User.findOne({ email });
-    //   if (!user || user.password !== password) return res.status(400).json({ msg: 'Invalid credentials' });
-
-    //   const token = jwt.sign({ id: user._id, role: 'user' }, process.env.JWT_SECRET);
-    //   return res.json({ token });
-    if (role === 'user') {
+     if (role === 'user') {
   const user = await User.findOne({ email });
   if (!user || user.password !== password) return res.status(400).json({ msg: 'Invalid credentials' });
   console.log("JWT_SECRET at login:", process.env.JWT_SECRET);
@@ -104,7 +98,7 @@ exports.loginUser = async (req, res) => {
 
   if (!chef.isApproved) return res.status(401).json({ msg: 'Chef not yet approved' });
 
-  // ✅ Compare hashed approvalPassword
+  //  Compare hashed approvalPassword
   const isMatch = await require('bcryptjs').compare(approvalPassword, chef.approvalPassword);
   if (!isMatch) {
     return res.status(403).json({ msg: 'Invalid approval password' });
@@ -118,7 +112,7 @@ exports.loginUser = async (req, res) => {
           name: chef.name,
           email: chef.email,
           city: chef.city,
-          role: 'chef' // ✅ added this line
+          role: 'chef' //  added this line
      }
   });
 }

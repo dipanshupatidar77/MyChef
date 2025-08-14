@@ -1,294 +1,9 @@
-// const path = require('path');
-// const fs = require('fs');
-// const Chef = require('../models/Chef');
-// const generateChefPDF = require('../utils/generateChefPDF');
-
-// exports.registerChef = async (req, res) => {
-//   try {
-//     console.log('Received chef registration body:', req.body);
-//     console.log('Received chef registration file:', req.file);
-
-//     const {
-//       name, email, password, mobile, experience, age,
-//       city, specialty, dishes, chargesPerPerson,
-//       serviceTimeFrom, serviceTimeTo
-//     } = req.body;
-
-//     const existing = await Chef.findOne({ email });
-//     if (existing) return res.status(400).json({ msg: 'Chef already exists' });
-
-//     const profilePicUrl = req.file?.path; // Cloudinary URL
-
-//     const newChef = new Chef({
-//       name,
-//       email,
-//       password, // NOTE: hash this in production
-//       mobile,
-//       experience,
-//       age,
-//       city,
-//       specialty,
-//       dishes: typeof dishes === 'string' ? dishes.split(',') : [],
-//       chargesPerPerson,
-//       serviceTime: {
-//         from: serviceTimeFrom,
-//         to: serviceTimeTo
-//       },
-//       profilePicUrl: profilePicUrl, // Cloudinary link saved in DB
-//       isApproved: false
-//     });
-
-//     // Make sure the uploads folder exists
-//     const uploadDir = path.join(__dirname, '../uploads/chefs');
-//     if (!fs.existsSync(uploadDir)) {
-//       fs.mkdirSync(uploadDir, { recursive: true });
-//     }
-
-//     // Generate and save PDF locally
-//     const filename = `${name.replace(/ /g, '_')}_${Date.now()}.pdf`;
-//     const pdfPath = path.join(uploadDir, filename);
-
-//     await generateChefPDF(newChef, profilePicUrl, pdfPath);
-//     newChef.pdfPath = `chefs/${filename}`; // Local path to PDF stored in DB
-
-//     await newChef.save();
-
-//     res.status(201).json({ msg: 'Chef registered. Awaiting admin approval.' });
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).json({ msg: 'Server error', error: err.message });
-//   }
-// };
-
-// // get chef controller Support optional city filter through query params,
-// // const Chef = require('../models/Chef');
-
-// exports.getApprovedChefs = async (req, res) => {
-//   try {
-//     const { city } = req.query;
-//     let filter = { isApproved: true };
-//     if (city) {
-//       filter.city = { $regex: new RegExp(city, 'i') }; // case-insensitive partial match
-//     }
-
-//     const chefs = await Chef.find(filter).select('name experience city profilePicUrl'); // select only required fields
-//     res.status(200).json({chefs});
-//   } catch (error) {
-//     res.status(500).json({ msg: 'Server error', error: error.message });
-//   }
-// };
-
-
-// // ✅ NEW: Get a single chef by ID
-// exports.getChefById = async (req, res) => {
-//   try {
-//     const chef = await Chef.findById(req.params.id).select('-password');
-//     if (!chef) return res.status(404).json({ msg: 'Chef not found' });
-//     res.json(chef);
-//   } catch (error) {
-//     res.status(500).json({ msg: 'Server error', error: error.message });
-//   }
-// };
-
-// const Booking = require('../models/Booking');
-// const User = require('../models/User');
-
-// // ✅ Get all pending bookings (not accepted/rejected) — only show chef-relevant ones
-// // controllers/chefController.js
-// exports.getPendingBookings = async (req, res) => {
-//   try {
-//     const bookings = await Booking.find({ chefId: req.user.id, status: 'pending' }).populate('userId');
-//     res.json(bookings);
-//   } catch (err) {
-//     res.status(500).json({ msg: 'Failed to fetch pending bookings', error: err.message });
-//   }
-// };
-
-// //const Booking = require('../models/Booking');
-
-// // // Accept Booking
-// // exports.acceptBooking = async (req, res) => {
-// //   try {
-// //     const booking = await Booking.findById(req.params.id);
-
-// //     if (!booking) return res.status(404).json({ msg: 'Booking not found' });
-
-// //     if (booking.chef.toString() !== req.user.id)
-// //       return res.status(403).json({ msg: 'Unauthorized' });
-
-// //     booking.status = 'accepted';
-// //     await booking.save();
-
-// //     res.json({ msg: 'Booking accepted successfully' });
-// //   } catch (err) {
-// //     res.status(500).json({ msg: 'Server error', error: err.message });
-// //   }
-// // };
-
-// // // Reject Booking
-// // exports.rejectBooking = async (req, res) => {
-// //   try {
-// //     const booking = await Booking.findById(req.params.id);
-
-// //     if (!booking) return res.status(404).json({ msg: 'Booking not found' });
-
-// //     if (booking.chef.toString() !== req.user.id)
-// //       return res.status(403).json({ msg: 'Unauthorized' });
-
-// //     booking.status = 'rejected';
-// //     await booking.save();
-
-// //     res.json({ msg: 'Booking rejected successfully' });
-// //   } catch (err) {
-// //     res.status(500).json({ msg: 'Server error', error: err.message });
-// //   }
-// // };
-
-// export const acceptBooking = async (bookingId) => {
-//   try {
-//     const token = localStorage.getItem('chefToken'); // ✅ Correct token
-//     if (!token) throw new Error('Chef token not found');
-
-//     const res = await fetch(`/api/chef/bookings/${bookingId}/accept`, {
-//       method: 'PUT',
-//       headers: {
-//         'Content-Type': 'application/json',
-//         Authorization: `Bearer ${token}`,
-//       },
-//     });
-
-//     return await res.json();
-//   } catch (err) {
-//     console.error('Error accepting booking:', err);
-//     return null;
-//   }
-// };
-
-// export const rejectBooking = async (bookingId) => {
-//   try {
-//     const token = localStorage.getItem('chefToken'); // ✅ Correct token
-//     if (!token) throw new Error('Chef token not found');
-
-//     const res = await fetch(`/api/chef/bookings/${bookingId}/reject`, {
-//       method: 'PUT',
-//       headers: {
-//         'Content-Type': 'application/json',
-//         Authorization: `Bearer ${token}`,
-//       },
-//     });
-
-//     return await res.json();
-//   } catch (err) {
-//     console.error('Error rejecting booking:', err);
-//     return null;
-//   }
-// };
-
-
-//  // if user info is needed
-//   // this is the booking details handller fucntion 
-// exports.getBookingDetails = async (req, res) => {
-//   try {
-//     const booking = await Booking.findById(req.params.id)
-//       .populate('user', 'name email city')      // optional: show user info
-//       .populate('chef', 'name specialty');      // optional: show chef info
-
-//     if (!booking) return res.status(404).json({ msg: 'Booking not found' });
-
-//     if (booking.chef.toString() !== req.user.id)
-//       return res.status(403).json({ msg: 'Unauthorized' });
-
-//     res.json({ booking });
-//   } catch (err) {
-//     res.status(500).json({ msg: 'Server error', error: err.message });
-//   }
-// };
-// // for the getting the upcoming bookings 
-// exports.getChefUpcomingBookings = async (req, res) => {
-//   try {
-//     const chefId = req.user.id; // 👈 coming from verifyChef middleware
-
-//     const bookings = await Booking.find({
-//       chef: chefId,             // ✅ filter by logged-in chef
-//       status: 'accepted'
-//     })
-//       .populate('user', 'name')
-//       .populate('chef', 'name city');
-//      console.log("Fetching bookings for Chef ID:", req.user.id);
-//       console.log("Returned Bookings:", bookings);
-
-//     res.json(bookings);
-//   } catch (error) {
-//     res.status(500).json({ msg: 'Server error', error: error.message });
-//   }
-// };
-
-
-
 const path = require('path');
 const fs = require('fs');
 const Chef = require('../models/Chef');
 const generateChefPDF = require('../utils/generateChefPDF');
 const Booking = require('../models/Booking');
 const User = require('../models/User');
-
-// exports.registerChef = async (req, res) => {
-//   try {
-//     console.log('Received chef registration body:', req.body);
-//     console.log('Received chef registration file:', req.file);
-
-//     const {
-//       name, email, password, mobile, experience, age,
-//       city, specialty, dishes, chargesPerVisit,
-//       serviceTimeFrom, serviceTimeTo
-//     } = req.body;
-
-//     const existing = await Chef.findOne({ email });
-//     if (existing) return res.status(400).json({ msg: 'Chef already exists' });
-
-//     const profilePicUrl = req.file?.path;
-
-//     const newChef = new Chef({
-//       name,
-//       email,
-//       password,
-//       mobile,
-//       experience,
-//       age,
-//       city,
-//       specialty,
-//       //dishes: typeof dishes === 'string' ? dishes.split(',') : [],
-//       dishes: typeof dishes === 'string' ? JSON.parse(dishes) : dishes,
-
-//       chargesPerVisit,
-//       serviceTime: {
-//         from: serviceTimeFrom,
-//         to: serviceTimeTo
-//       },
-//       profilePicUrl,
-//       isApproved: false
-//     });
-
-//     const uploadDir = path.join(__dirname, '../uploads/chefs');
-//     if (!fs.existsSync(uploadDir)) {
-//       fs.mkdirSync(uploadDir, { recursive: true });
-//     }
-
-//     const filename = `${name.replace(/ /g, '_')}_${Date.now()}.pdf`;
-//     const pdfPath = path.join(uploadDir, filename);
-
-//     await generateChefPDF(newChef, profilePicUrl, pdfPath);
-//     newChef.pdfPath = `chefs/${filename}`;
-
-//     await newChef.save();
-
-//     res.status(201).json({ msg: 'Chef registered. Awaiting admin approval.' });
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).json({ msg: 'Server error', error: err.message });
-//   }
-// };
-
 
 exports.registerChef = async (req, res) => {
   try {
@@ -345,26 +60,13 @@ exports.registerChef = async (req, res) => {
   }
 };
 
-// exports.getApprovedChefs = async (req, res) => {
-//   try {
-//     const { city } = req.query;
-//     let filter = { isApproved: true };
-//     if (city) {
-//       filter.city = { $regex: new RegExp(city, 'i') };
-//     }
 
-//     const chefs = await Chef.find(filter).select('name experience city profilePicUrl');
-//     res.status(200).json({ chefs });
-//   } catch (error) {
-//     res.status(500).json({ msg: 'Server error', error: error.message });
-//   }
-// };
 
 exports.getApprovedChefs = async (req, res) => {
   try {
     const { city } = req.query;
 
-    // ✅ Now exclude blocked chefs too
+    //  Now exclude blocked chefs too
     let filter = { isApproved: true, isBlocked: { $ne: true } };
 
     if (city) {
@@ -465,8 +167,8 @@ exports.getChefUpcomingBookings = async (req, res) => {
 
     const bookings = await Booking.find({
       chef: chefId,
-      status: { $in: ['accepted', 'cancelled'] }, // ✅ include both accepted & cancelled
-       exitConfirmed: false                       // ✅ still upcoming, not completed
+      status: { $in: ['accepted', 'cancelled'] }, // include both accepted & cancelled
+       exitConfirmed: false                       //  still upcoming, not completed
     })
       .populate('user', 'name')
       .populate('chef', 'name city chargesPerVisit');
@@ -542,7 +244,7 @@ exports.updateChefProfile = async (req, res) => {
 exports.getChefCompletedBookings = async (req, res) => {
   try {
     const chefId = req.user.id;
-    console.log("Fetching completed bookings for chef:", chefId); // ✅ DEBUG
+    console.log("Fetching completed bookings for chef:", chefId); //  DEBUG
 
     const bookings = await Booking.find({
       chef: chefId,
@@ -553,7 +255,7 @@ exports.getChefCompletedBookings = async (req, res) => {
 
     res.status(200).json(bookings);
   } catch (err) {
-    console.error('❌ Error fetching completed bookings:', err); // ✅ See this in terminal
+    console.error('❌ Error fetching completed bookings:', err); //  See this in terminal
     res.status(500).json({ msg: 'Server error', error: err.message });
   }
 };
